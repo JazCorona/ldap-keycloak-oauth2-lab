@@ -1,0 +1,34 @@
+[swagger-api] [http] [info] http://ldap-oauth-api:8000/docs [paths="/docs"]
+[cookies-without-httponly] [javascript] [info] phpldapadmin:80 ["5d89dac18813e15aa2f75788275e3588"]
+[cookies-without-secure] [javascript] [info] phpldapadmin:80 ["5d89dac18813e15aa2f75788275e3588"]
+[waf-detect:apachegeneric] [http] [info] http://phpldapadmin:80
+[ldap-metadata] [javascript] [info] openldap:389 ["ForestFunctionality:","DomainControllerFunctionality:","BaseDN: dc=389","DnsHostName:","DefaultNamingContext:","DomainFunctionality:"]
+[ldap-metadata] [javascript] [info] openldap:636 ["BaseDN: dc=636","DnsHostName:","DefaultNamingContext:","DomainFunctionality:","ForestFunctionality:","DomainControllerFunctionality:"]
+[ldap-anonymous-login-detect] [javascript] [medium] openldap:389
+[pgsql-detect] [tcp] [info] keycloak-db:5432
+[options-method] [http] [info] http://keycloak:8080 ["HEAD, POST, GET, OPTIONS"]
+[tech-detect:uvicorn] [http] [info] http://ldap-oauth-api:8000
+[missing-cookie-samesite-strict] [http] [info] http://phpldapadmin:80 ["5d89dac18813e15aa2f75788275e3588=qp1t9b8dodugqgimq0vseea5p9; path=/"]
+[openapi] [http] [info] http://ldap-oauth-api:8000/openapi.json
+[redoc-api-docs] [http] [info] http://ldap-oauth-api:8000/redoc
+[http-missing-security-headers:cross-origin-opener-policy] [http] [info] http://ldap-oauth-api:8000
+[http-missing-security-headers:cross-origin-embedder-policy] [http] [info] http://phpldapadmin:80
+[http-missing-security-headers:strict-transport-security] [http] [info] http://ldap-oauth-api:8000
+[http-missing-security-headers:content-security-policy] [http] [info] http://ldap-oauth-api:8000
+[http-missing-security-headers:cross-origin-opener-policy] [http] [info] http://phpldapadmin:80
+[http-missing-security-headers:permissions-policy] [http] [info] http://ldap-oauth-api:8000
+[http-missing-security-headers:cross-origin-resource-policy] [http] [info] http://phpldapadmin:80
+[http-missing-security-headers:x-frame-options] [http] [info] http://ldap-oauth-api:8000
+[http-missing-security-headers:strict-transport-security] [http] [info] http://phpldapadmin:80
+[http-missing-security-headers:x-content-type-options] [http] [info] http://ldap-oauth-api:8000
+[http-missing-security-headers:content-security-policy] [http] [info] http://phpldapadmin:80
+[http-missing-security-headers:referrer-policy] [http] [info] http://ldap-oauth-api:8000
+[http-missing-security-headers:permissions-policy] [http] [info] http://phpldapadmin:80
+[http-missing-security-headers:cross-origin-embedder-policy] [http] [info] http://ldap-oauth-api:8000
+[http-missing-security-headers:x-permitted-cross-domain-policies] [http] [info] http://phpldapadmin:80
+[http-missing-security-headers:cross-origin-resource-policy] [http] [info] http://ldap-oauth-api:8000
+[http-missing-security-headers:referrer-policy] [http] [info] http://phpldapadmin:80
+[http-missing-security-headers:x-permitted-cross-domain-policies] [http] [info] http://ldap-oauth-api:8000
+[xss-deprecated-header] [http] [info] http://phpldapadmin:80 ["1; mode=block"]
+[apache-detect] [http] [info] http://phpldapadmin:80 ["Apache"]
+[phpldapadmin-panel] [http] [info] http://phpldapadmin:80 ["1.2.5"]

@@ -1,0 +1,43 @@
+﻿System.Management.Automation.RemoteException
+                     __     _
+   ____  __  _______/ /__  (_)
+  / __ \/ / / / ___/ / _ \/ /
+ / / / / /_/ / /__/ /  __/ /
+/_/ /_/\__,_/\___/_/\___/_/   v3.11.1
+System.Management.Automation.RemoteException
+		projectdiscovery.io
+System.Management.Automation.RemoteException
+[INF] Current nuclei version: v3.11.1 (unknown) - remove '-duc' flag to enable update checks
+[INF] Current nuclei-templates version: v10.5.0 (unknown) - remove '-duc' flag to enable update checks
+[INF] New templates added in latest release: 295
+[INF] Templates loaded for current scan: 447
+[INF] Executing 447 signed templates from projectdiscovery/nuclei-templates
+[INF] Targets loaded for current scan: 1
+[credentials-disclosure-file] [file] [unknown] /src/.git/hooks/fsmonitor-watchman.sample ["update_token ="]
+[credentials-disclosure-file] [file] [unknown] /src/docker-compose.yml ["ADMIN_PASSWORD:","POSTGRES_PASSWORD:","DB_USERNAME: keycloak","DB_PASSWORD: keycloakpassword","DB_PASSWORD:","auth-network:"]
+[credentials-disclosure-file] [file] [unknown] /src/fastapi/app/main.py ["token:","key=","key:"]
+[credentials-disclosure-file] [file] [unknown] /src/ldap/users.ldif ["Password:"]
+[credentials-disclosure-file] [file] [unknown] /src/README.md ["password=","TOKEN="]
+[credentials-disclosure-file] [file] [unknown] /src/nuclei-results/connectivity.txt ["auth-api:"]
+[credentials-disclosure-file] [file] [unknown] /src/nuclei-results/markdown/http-missing-security-headers-ldap-oauth-api-31995e73-7508-4f34-a1c6-ef989fca19b5-content-security-policy.md ["auth-api:"]
+[credentials-disclosure-file] [file] [unknown] /src/nuclei-results/markdown/http-missing-security-headers-ldap-oauth-api-41ca5c42-dc63-467e-ba96-f70fd38083c4-x-permitted-cross-domain-policies.md ["auth-api:"]
+[credentials-disclosure-file] [file] [unknown] /src/nuclei-results/markdown/http-missing-security-headers-ldap-oauth-api-a3ba9073-7a8e-4138-a4d7-197b86c8b51b-cross-origin-resource-policy.md ["auth-api:"]
+[credentials-disclosure-file] [file] [unknown] /src/nuclei-results/markdown/http-missing-security-headers-ldap-oauth-api-c67dbfd0-da79-4519-9e2a-5ac3e1ccc8c4-x-frame-options.md ["auth-api:"]
+[credentials-disclosure-file] [file] [unknown] /src/nuclei-results/markdown/http-missing-security-headers-ldap-oauth-api-b96c150d-e50a-446c-8e37-f83450966d9c-x-content-type-options.md ["auth-api:"]
+[credentials-disclosure-file] [file] [unknown] /src/nuclei-results/markdown/http-missing-security-headers-ldap-oauth-api-1af54ea3-7197-4239-a478-68315e1c8e6b-cross-origin-opener-policy.md ["auth-api:"]
+[credentials-disclosure-file] [file] [unknown] /src/nuclei-results/markdown/http-missing-security-headers-ldap-oauth-api-177296bf-9a6c-4d09-89e8-77945a85c1b4-strict-transport-security.md ["auth-api:"]
+[credentials-disclosure-file] [file] [unknown] /src/nuclei-results/markdown/http-missing-security-headers-ldap-oauth-api-d6c2b504-81be-4a1c-8727-203a11647b6a-referrer-policy.md ["auth-api:"]
+[credentials-disclosure-file] [file] [unknown] /src/nuclei-results/markdown/http-missing-security-headers-ldap-oauth-api-6f4127f1-3db8-4d5d-801f-7d7a9734989f-cross-origin-embedder-policy.md ["auth-api:"]
+[credentials-disclosure-file] [file] [unknown] /src/nuclei-results/markdown/http-missing-security-headers-ldap-oauth-api-4caf561e-8e1a-40fc-bd9f-14ad17564d2b-permissions-policy.md ["auth-api:"]
+[credentials-disclosure-file] [file] [unknown] /src/nuclei-results/markdown/tech-detect-ldap-oauth-api-fd005fb4-7bce-487d-8cfe-855e4ce6975c-uvicorn.md ["auth-api:"]
+[credentials-disclosure-file] [file] [unknown] /src/nuclei-results/markdown/openapi-ldap-oauth-api-c324daa0-c354-4ede-98dd-97eb74b9f3d5.md ["auth-api:"]
+[credentials-disclosure-file] [file] [unknown] /src/nuclei-results/targets.txt ["auth-api:"]
+[credentials-disclosure-file] [file] [unknown] /src/nuclei-results/markdown/swagger-api-ldap-oauth-api-027d75c3-f6bd-4059-a12e-ac24ece9c4e2.md ["auth-api:"]
+[credentials-disclosure-file] [file] [unknown] /src/nuclei-results/markdown/redoc-api-docs-ldap-oauth-api-f21f4609-f45b-4b70-b94f-1309299c188e.md ["auth-api:"]
+[credentials-disclosure-file] [file] [unknown] /src/nuclei-results/nuclei-report.txt ["auth-api:"]
+[credentials-disclosure-file] [file] [unknown] /src/nuclei-results/nuclei-file-report.txt ["update_token =",""DB_USERNAME: keycloak"",""DB_PASSWORD: keycloakpassword"","ADMIN_PASSWORD:","POSTGRES_PASSWORD:","DB_PASSWORD:","auth-network:","key:","token:","key=","Password:","password=","TOKEN=","auth-api:"]
+[credentials-disclosure-file] [file] [unknown] /src/nuclei-results/nuclei-file-scan.log ["update_token =","DB_PASSWORD:","auth-network:",""DB_USERNAME: keycloak"",""DB_PASSWORD: keycloakpassword"","ADMIN_PASSWORD:","POSTGRES_PASSWORD:","token:","key=","key:","Password:","password=","TOKEN=","auth-api:"]
+[credentials-disclosure-file] [file] [unknown] /src/nuclei-results/nuclei-report.jsonl ["auth-api:"]
+[0:00:19] | Templates: 447 | Hosts: 1 | RPS: 1614 | Matched: 25 | Errors: 0 | Requests: 30570/30570 (100%)
+[INF] Scan completed in 18.932895374s. 25 matches found.
+[0:00:19] | Templates: 447 | Hosts: 1 | RPS: 1613 | Matched: 25 | Errors: 0 | Requests: 30570/30570 (100%)

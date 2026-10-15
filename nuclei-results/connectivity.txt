@@ -1,0 +1,7 @@
+﻿Conectividad desde un contenedor en la red 'ldap-keycloak-oauth2-lab_auth-network' - 2026-10-14T23:14:11
+http://phpldapadmin:80 -> HTTP Unable to find image 'curlimages/curl:latest' locally latest: Pulling from curlimages/curl 410cbd33102b: Pulling fs layer 410cbd33102b: Verifying Checksum 410cbd33102b: Download complete 410cbd33102b: Pull complete Digest: sha256:a134550be58ab783810e613ae96fd253c38f7bdd16d9bf9be350700c7a29ac06 Status: Downloaded newer image for curlimages/curl:latest 200
+http://keycloak:8080 -> HTTP 302
+http://ldap-oauth-api:8000 -> HTTP 404
+openldap:389 -> TCP Unable to find image 'busybox:latest' locally latest: Pulling from library/busybox 37bb94b0940b: Pulling fs layer 37bb94b0940b: Verifying Checksum 37bb94b0940b: Download complete 37bb94b0940b: Pull complete Digest: sha256:fd7dc98638c8e305f4dc34e979f1c0fdfdcaeb0fbf8fcff77ae834b6da3d7e6e Status: Downloaded newer image for busybox:latest open
+openldap:636 -> TCP open
+keycloak-db:5432 -> TCP open

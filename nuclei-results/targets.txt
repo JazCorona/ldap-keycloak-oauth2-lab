@@ -1,0 +1,6 @@
+http://phpldapadmin:80
+http://keycloak:8080
+http://ldap-oauth-api:8000
+openldap:389
+openldap:636
+keycloak-db:5432
