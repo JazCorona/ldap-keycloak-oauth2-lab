@@ -139,3 +139,28 @@ docker exec keycloak cat /opt/keycloak/data/import/cybersecurity-realm.json \
 This should list four mappers, not an empty object.
 
 
+
+## Análisis de seguridad con Nuclei
+Escaneo realizado el 2026-10-14 con **Nuclei v3.11.1** (templates v10.5.0, 11,144 templates).
+Nuclei corrió en un contenedor conectado a la red Docker del lab (`ldap-keycloak-oauth2-lab_auth-network`),
+así que alcanzó cada servicio por su nombre de contenedor sin problemas de puertos. También se escaneó el
+código fuente con los templates `file/`.
+
+Resultados completos: [`nuclei-results/`](nuclei-results/) · Triage: [`nuclei-results/RESUMEN.md`](nuclei-results/RESUMEN.md)
+
+| Severidad | Hallazgo | Servicio |
+|---|---|---|
+| **Medium** | Bind anónimo habilitado en LDAP (`ldap-anonymous-login-detect`) | openldap:389 |
+| Info | RootDSE de LDAP legible de forma anónima (`ldap-metadata`) | openldap:389 / 636 |
+| Info | Cookie de sesión sin `HttpOnly`, `Secure` ni `SameSite` | phpLDAPadmin |
+| Info | Panel de administración expuesto con versión revelada (1.2.5), Apache detectado, header obsoleto `X-XSS-Protection` | phpLDAPadmin |
+| Info | Swagger `/docs`, ReDoc `/redoc` y `/openapi.json` públicos | API FastAPI |
+| Info | Faltan 10 headers de seguridad (CSP, HSTS, X-Frame-Options, etc.) | phpLDAPadmin, API |
+| Info | Se revela la tecnología del servidor (`uvicorn`) | API FastAPI |
+| Info | Método `OPTIONS` habilitado | Keycloak |
+| Info | PostgreSQL alcanzable en la red interna | keycloak-db:5432 |
+| Código | Contraseñas en texto plano | `docker-compose.yml`, `ldap/users.ldif`, `README.md` |
+
+Para repetir el escaneo en Windows con Docker Desktop:
+`powershell -ExecutionPolicy Bypass -File nuclei-results/run-nuclei.ps1`
+(el script espera que los 3 repos estén en la misma carpeta padre; cópialo a esa carpeta antes de ejecutarlo).
