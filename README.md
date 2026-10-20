@@ -164,3 +164,40 @@ Resultados completos: [`nuclei-results/`](nuclei-results/) · Triage: [`nuclei-r
 Para repetir el escaneo en Windows con Docker Desktop:
 `powershell -ExecutionPolicy Bypass -File nuclei-results/run-nuclei.ps1`
 (el script espera que los 3 repos estén en la misma carpeta padre; cópialo a esa carpeta antes de ejecutarlo).
+
+---
+
+## Seguridad (actividad DDoS)
+
+### 1. Fail2Ban contra HTTP-flood en la API (flujo JWT)
+La imagen `api` (FastAPI) ahora corre **Nginx + Fail2Ban** al frente del uvicorn
+(`127.0.0.1:9000`). El jail `http-flood` banea con `iptables-allports`.
+- Config: [`fastapi/security/`](fastapi/security/).
+- En el compose, `api` lleva `cap_add: [NET_ADMIN, NET_RAW]`.
+
+```bash
+docker compose up --build
+docker compose exec api fail2ban-client status http-flood
+```
+
+### 2. Protección EXTRA a nivel de puerto para LDAP sobre TLS (LDAPS 636)
+- Al host **solo se publica el puerto TLS 636** (LDAPS). El `389` (texto plano)
+  deja de exponerse al host y queda **interno** para que Keycloak federe
+  (`ldap://openldap:389`).
+- Un sidecar `ldap-fw` ([`ldap/ldap-fw.sh`](ldap/ldap-fw.sh)) comparte el network
+  namespace de `openldap` y aplica reglas **iptables** sobre el 636:
+  - límite de **tasa** de conexiones nuevas por IP (`hashlimit`, ~30/min, ráfaga 15),
+  - límite de **conexiones concurrentes** por IP (`connlimit`, máx. 20).
+  Así un flood contra el puerto TLS se frena a nivel de puerto, sin tumbar el servicio.
+
+```bash
+# ver las reglas aplicadas al 636:
+docker logs openldap-fw
+docker exec openldap-fw iptables -L INPUT -n --line-numbers | grep 636
+```
+
+### 3. Prueba de carga
+En el repo aparte **dashboard-musica-ddos**:
+```bash
+python sweep.py 127.0.0.1 8000 --out resultados-ldap.txt
+```

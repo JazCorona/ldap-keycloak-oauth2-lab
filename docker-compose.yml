@@ -6,13 +6,32 @@ services:
       LDAP_ORGANISATION: "Example Corp"
       LDAP_DOMAIN: "example.com"
       LDAP_ADMIN_PASSWORD: "adminpassword"
+      # TLS habilitado (la imagen genera certificados y escucha LDAPS en 636).
+      LDAP_TLS: "true"
     ports:
-      - "389:389"
+      # Solo se publica al host el puerto TLS (LDAPS 636). El 389 (texto plano)
+      # queda SIN publicar: sigue disponible dentro de la red Docker para que
+      # Keycloak federe (ldap://openldap:389), pero no se expone fuera.
       - "636:636"
     volumes:
       - ldap_data:/var/lib/ldap
       - ldap_config:/etc/ldap/slapd.d
     networks: [auth-network]
+
+  # --- Protección EXTRA a nivel de puerto para LDAPS (636) ---
+  # Comparte el network namespace de openldap y aplica reglas iptables que
+  # limitan tasa y concurrencia de conexiones nuevas al puerto TLS 636.
+  ldap-fw:
+    image: alpine:3.20
+    container_name: openldap-fw
+    network_mode: "service:openldap"
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+    volumes:
+      - ./ldap/ldap-fw.sh:/ldap-fw.sh:ro
+    entrypoint: ["/bin/sh", "/ldap-fw.sh"]
+    depends_on: [openldap]
 
   phpldapadmin:
     image: osixia/phpldapadmin:latest
@@ -38,8 +57,8 @@ services:
 
   keycloak:
     image: quay.io/keycloak/keycloak:26.7.4
-    container_name: keycloak
     command: start-dev --import-realm
+    container_name: keycloak
     environment:
       KC_BOOTSTRAP_ADMIN_USERNAME: admin
       KC_BOOTSTRAP_ADMIN_PASSWORD: adminpassword
@@ -60,8 +79,12 @@ services:
   api:
     build: ./fastapi
     container_name: ldap-oauth-api
+    # Fail2Ban dentro del contenedor banea con iptables: requiere estas caps.
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
     ports:
-      - "8000:8000"
+      - "8000:8000"   # Nginx + Fail2Ban al frente (uvicorn queda en 127.0.0.1:9000)
     environment:
       KEYCLOAK_INTERNAL: http://keycloak:8080
       KEYCLOAK_PUBLIC: http://localhost:8081

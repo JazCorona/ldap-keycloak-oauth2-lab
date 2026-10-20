@@ -1,0 +1,26 @@
+[DEFAULT]
+banaction = iptables-allports
+ignoreip  = 127.0.0.1/8
+usedns    = no
+backend   = polling
+
+bantime            = 10m
+bantime.increment  = true
+bantime.factor     = 2
+bantime.maxtime    = 1d
+bantime.rndtime    = 30s
+
+[sshd]
+enabled = false
+[sshd-ddos]
+enabled = false
+
+[http-flood]
+enabled  = true
+port     = http,https
+filter   = http-flood
+logpath  = /var/log/nginx/access.log
+# Banea tras 60 peticiones en cualquier ventana de 10s (~6 req/s sostenidas).
+# >>> Ajusta maxretry/findtime para tus pruebas de carga <<<
+maxretry = 60
+findtime = 10s
