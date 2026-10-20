@@ -30,7 +30,8 @@ services:
       - NET_RAW
     volumes:
       - ./ldap/ldap-fw.sh:/ldap-fw.sh:ro
-    entrypoint: ["/bin/sh", "/ldap-fw.sh"]
+    # Se limpian posibles CRLF (clon en Windows) antes de ejecutar el script.
+    entrypoint: ["/bin/sh", "-c", "tr -d '\\r' < /ldap-fw.sh > /tmp/ldap-fw.sh && exec sh /tmp/ldap-fw.sh"]
     depends_on: [openldap]
 
   phpldapadmin:
